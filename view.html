@@ -105,14 +105,12 @@
   <button class="back-btn" onclick="window.location.href='index.html'">🏠 Back to Home</button>
 
   <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxywQO31qakY1WFYCibtn7BbLKB9pG_t_Mh6DHOpeEkksa21c9OQ7CJRBemdHJKk24xWA/exec"; // <-- Replace this
+    const scriptURL = "https://script.google.com/macros/s/AKfycbxywQO31qakY1WFYCibtn7BbLKB9pG_t_Mh6DHOpeEkksa21c9OQ7CJRBemdHJKk24xWA/exec"; // 🔁 Replace this
 
     function loadMessages() {
       const name = document.getElementById("receiverInput").value.trim();
-      if (!name) {
-        alert("Please enter your name.");
-        return;
-      }
+      if (!name) return alert("Please enter your name");
+
       const frame = document.getElementById("messageFrame");
       frame.src = `${scriptURL}?receiver=${encodeURIComponent(name)}`;
       frame.style.display = "block";
