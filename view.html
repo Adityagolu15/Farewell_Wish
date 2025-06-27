@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View My Farewell Messages</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+      margin: 0;
+      padding: 20px;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h1 {
+      text-align: center;
+      color: #4a148c;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    .subtext {
+      text-align: center;
+      font-size: 1rem;
+      color: #5e5e5e;
+      margin-bottom: 25px;
+    }
+    .container {
+      max-width: 700px;
+      background: #ffffff;
+      margin: auto;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+      animation: slideUp 1s ease;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    input {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 2px solid #ccc;
+      margin-top: 15px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    input:focus {
+      border-color: #8e24aa;
+      box-shadow: 0 0 5px rgba(142, 36, 170, 0.4);
+      outline: none;
+    }
+    button {
+      background: linear-gradient(to right, #8e24aa, #d81b60);
+      color: white;
+      padding: 14px;
+      font-size: 16px;
+      margin-top: 20px;
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s;
+    }
+    button:hover {
+      background: linear-gradient(to right, #6a1b9a, #c2185b);
+      transform: scale(1.02);
+    }
+    .message-list {
+      margin-top: 25px;
+    }
+    .message-item {
+      background: #f3e5f5;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      animation: fadeIn 0.8s ease-in;
+    }
+    .message-item strong {
+      color: #6a1b9a;
+    }
+    .emoji {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="emoji">📬🎓💌</div>
+    <h1>My Farewell Messages</h1>
+    <div class="subtext">Read what your friends have shared with you 💬</div>
+    <input type="text" id="nameInput" placeholder="Enter your name (e.g., Aditya)" />
+    <button onclick="fetchMessages()">🔍 View Messages</button>
+    <div id="output" class="message-list"></div>
+  </div>
+
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbxywQO31qakY1WFYCibtn7BbLKB9pG_t_Mh6DHOpeEkksa21c9OQ7CJRBemdHJKk24xWA/exec";
+
+    function fetchMessages() {
+      const name = document.getElementById("nameInput").value.trim();
+      if (!name) {
+        alert("Please enter your name");
+        return;
+      }
+      const url = `${scriptURL}?receiver=${encodeURIComponent(name)}`;
+      fetch(url)
+        .then(res => res.json())
+        .then(data => {
+          const outputDiv = document.getElementById("output");
+          outputDiv.innerHTML = "";
+          if (data.length === 0) {
+            outputDiv.innerHTML = "<p>No messages found.</p>";
+          } else {
+            data.forEach(msg => {
+              outputDiv.innerHTML += `
+                <div class="message-item">
+                  <strong>${msg.sender}</strong> says:<br>
+                  ${msg.message}
+                </div>
+              `;
+            });
+          }
+        })
+        .catch(err => {
+          alert("Something went wrong. Make sure the Google Script is published and allows anyone to access.");
+          console.error(err);
+        });
+    }
+  </script>
+</body>
+</html>

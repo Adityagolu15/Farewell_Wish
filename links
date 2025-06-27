@@ -1,0 +1,15 @@
+const baseFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSei1jsHfUyfa6-dxF-1SsHUb8okNMXjFOl0DHI5vZDCkxdvtA/viewform?usp=pp_url&entry.1181895659=";
+
+
+const scriptURL = "https://script.google.com/macros/s/AKfycbx-OYuMTGGDhHRJd_NsrnjVlwwjCq7e-fZZVFbJ6B-XYkwNnxhbXlihpUxyht2e1rGspg/exec";
+
+https://docs.google.com/forms/d/e/1FAIpQLSei1jsHfUyfa6-dxF-1SsHUb8okNMXjFOl0DHI5vZDCkxdvtA/viewform?usp=pp_url&entry.1958614341=a&entry.1664542188=dd&entry.1181895659=asd
+
+const baseFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSei1jsHfUyfa6-dxF-1SsHUb8okNMXjFOl0DHI5vZDCkxdvtA/viewform?usp=pp_url&entry.1958614341=&entry.1664542188=&entry.1181895659=";
+    const senderEntry = "entry.1958614341";
+    const receiverEntry = "entry.1181895659";
+    const messageEntry = "entry.1664542188";
+
+https://script.google.com/macros/s/AKfycbxbifbAhDmuzoBsgEv1Of4fGLrqsi9MfOxjERTmXBjPWKMN5C_vAfoYTXxt5suoeusVYw/exec
+
+https://script.google.com/macros/s/AKfycbxywQO31qakY1WFYCibtn7BbLKB9pG_t_Mh6DHOpeEkksa21c9OQ7CJRBemdHJKk24xWA/exec
