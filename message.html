@@ -101,9 +101,15 @@
       target="hiddenFrame" 
       onsubmit="showSuccess()">
 
-      <input type="hidden" name="receiver" id="receiverInput" />
+      <!-- Hidden field to send receiver name to Google Sheet -->
+      <input type="hidden" name="receiver" id="receiverHidden" />
+
+      <!-- Visible, read-only display of receiver's name -->
+      <input type="text" id="receiverVisible" readonly style="background: #f5f5f5; font-weight: 600;" />
+
       <input type="text" name="sender" placeholder="Your Name (e.g., Rahul)" required />
       <textarea name="message" placeholder="Your Farewell Message..." required></textarea>
+
       <button type="submit">📨 Submit Message</button>
     </form>
 
@@ -113,8 +119,9 @@
   </div>
 
   <script>
-    const receiver = new URLSearchParams(window.location.search).get("to");
-    document.getElementById("receiverInput").value = receiver || "";
+    const receiver = new URLSearchParams(window.location.search).get("to") || "";
+    document.getElementById("receiverHidden").value = receiver;
+    document.getElementById("receiverVisible").value = `To: ${receiver}`;
 
     function showSuccess() {
       setTimeout(() => {
