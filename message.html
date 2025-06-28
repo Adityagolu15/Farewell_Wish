@@ -95,24 +95,30 @@
     <h1>Write a Farewell Message</h1>
     <div class="subtext">Let your heart speak for your friend 💖</div>
 
-    <form action="https://script.google.com/macros/s/AKfycbxTcm-oOrdaOHGzcXThHHadluw-8G7bKK7Cg-Xiyudw4ox2RJZ7XK-Uo-g2kVYWw_qRCQ/exec" method="POST" target="dummyFrame" onsubmit="showNextLink()">
-      <input type="hidden" name="receiver" id="receiverNameInput" />
+    <form 
+      action="https://script.google.com/macros/s/AKfycbxTcm-oOrdaOHGzcXThHHadluw-8G7bKK7Cg-Xiyudw4ox2RJZ7XK-Uo-g2kVYWw_qRCQ/exec" 
+      method="POST" 
+      target="hiddenFrame" 
+      onsubmit="showSuccess()">
+
+      <input type="hidden" name="receiver" id="receiverInput" />
       <input type="text" name="sender" placeholder="Your Name (e.g., Rahul)" required />
       <textarea name="message" placeholder="Your Farewell Message..." required></textarea>
       <button type="submit">📨 Submit Message</button>
     </form>
 
-    <iframe name="dummyFrame" style="display:none;"></iframe>
+    <iframe name="hiddenFrame" style="display: none;"></iframe>
 
     <button id="nextLinkBtn" onclick="goToLinkGenerator()">🌟 Create My Own Message Link</button>
   </div>
 
   <script>
-    const receiver = new URLSearchParams(window.location.search).get("to") || "";
-    document.getElementById("receiverNameInput").value = receiver;
+    const receiver = new URLSearchParams(window.location.search).get("to");
+    document.getElementById("receiverInput").value = receiver || "";
 
-    function showNextLink() {
+    function showSuccess() {
       setTimeout(() => {
+        alert("🎉 Message submitted successfully!");
         document.getElementById("nextLinkBtn").style.display = "block";
       }, 1000);
     }
