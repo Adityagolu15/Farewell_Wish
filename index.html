@@ -132,7 +132,8 @@
         <a href="${finalLink}" target="_blank">${finalLink}</a>`;
 
       // WhatsApp Share Link
-      const whatsappMessage = `Hey! Send your farewell message to me here 👉 ${finalLink}`;
+      const indexLink = `${window.location.origin}${basePath}index.html`;
+      const whatsappMessage = `💭 Aakhri din aa hi gaya...\n\nShabdon mein woh sab nahi keh paaya jo dosti ke palon mein mehsoos kiya... Agar tumhare dil mein bhi kuch baatein reh gayi hain, toh bas likh dena yahan 💌\n\n👇 Ye link sirf tumhare liye hai:\n${finalLink}\n\nAur agar tum bhi chahte ho ki doston ki yaadein tumhare paas likhi rahein... toh yahan se apna link banao ya aaye huye messages padho:\n${indexLink}\n\nBas dil se likhna 💖`;
       const whatsappLink = `https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`;
       document.getElementById("whatsappShareBtn").innerHTML = `
         <a href="${whatsappLink}" target="_blank">📱 Share on WhatsApp</a>
