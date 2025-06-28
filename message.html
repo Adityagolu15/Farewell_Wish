@@ -94,58 +94,27 @@
     <div class="emoji">💌🎓📝</div>
     <h1>Write a Farewell Message</h1>
     <div class="subtext">Let your heart speak for your friend 💖</div>
-    <input type="text" id="senderName" placeholder="Your Name (e.g., Rahul)" />
-    <textarea id="messageText" placeholder="Your Farewell Message..."></textarea>
-    <input type="text" id="receiverName" readonly style="background: #f5f5f5; font-weight: 600;" />
-    <button onclick="submitMessage()">📨 Submit Message</button>
+
+    <form action="https://script.google.com/macros/s/AKfycbxTcm-oOrdaOHGzcXThHHadluw-8G7bKK7Cg-Xiyudw4ox2RJZ7XK-Uo-g2kVYWw_qRCQ/exec" method="POST" target="dummyFrame" onsubmit="showNextLink()">
+      <input type="hidden" name="receiver" id="receiverNameInput" />
+      <input type="text" name="sender" placeholder="Your Name (e.g., Rahul)" required />
+      <textarea name="message" placeholder="Your Farewell Message..." required></textarea>
+      <button type="submit">📨 Submit Message</button>
+    </form>
+
+    <iframe name="dummyFrame" style="display:none;"></iframe>
+
     <button id="nextLinkBtn" onclick="goToLinkGenerator()">🌟 Create My Own Message Link</button>
   </div>
 
   <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxTcm-oOrdaOHGzcXThHHadluw-8G7bKK7Cg-Xiyudw4ox2RJZ7XK-Uo-g2kVYWw_qRCQ/exec"; // Replace with your deployed script URL
+    const receiver = new URLSearchParams(window.location.search).get("to") || "";
+    document.getElementById("receiverNameInput").value = receiver;
 
-    function getQueryParam(param) {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get(param);
-    }
-
-    window.onload = () => {
-      const receiver = getQueryParam("to") || "";
-      document.getElementById("receiverName").value = receiver;
-    }
-
-    function submitMessage() {
-      const sender = document.getElementById("senderName").value.trim();
-      const receiver = document.getElementById("receiverName").value.trim();
-      const message = document.getElementById("messageText").value.trim();
-
-      if (!sender || !receiver || !message) {
-        alert("Please fill all fields.");
-        return;
-      }
-
-      const formData = new URLSearchParams();
-      formData.append("sender", sender);
-      formData.append("receiver", receiver);
-      formData.append("message", message);
-
-      fetch(scriptURL, {
-        method: "POST",
-        body: formData,
-      })
-      .then(res => res.json())
-      .then(result => {
-        if (result.status === "success") {
-          alert("🎉 Message submitted successfully!");
-          document.getElementById("nextLinkBtn").style.display = "block";
-        } else {
-          alert("❌ Something went wrong.");
-        }
-      })
-      .catch(err => {
-        console.error(err);
-        alert("⚠️ Error submitting message.");
-      });
+    function showNextLink() {
+      setTimeout(() => {
+        document.getElementById("nextLinkBtn").style.display = "block";
+      }, 1000);
     }
 
     function goToLinkGenerator() {
