@@ -67,6 +67,7 @@
       border-radius: 12px;
       cursor: pointer;
       transition: background 0.3s ease, transform 0.2s;
+      margin-top: 10px;
     }
     button:hover {
       background: linear-gradient(to right, #e65100, #ff8f00);
@@ -80,6 +81,10 @@
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
+    #backBtn {
+      background: linear-gradient(to right, #6a1b9a, #8e24aa);
+      margin-top: 25px;
+    }
   </style>
 </head>
 <body>
@@ -89,6 +94,8 @@
     <input type="text" id="receiverInput" placeholder="Enter your name (e.g., Sakshi)">
     <button onclick="loadMessages()">🔍 Show Messages</button>
     <iframe id="messagesFrame"></iframe>
+
+    <button id="backBtn" onclick="goHome()">🏠 Back to Home</button>
   </div>
 
   <script>
@@ -102,6 +109,10 @@
       const scriptURL = "https://script.google.com/macros/s/AKfycbwgOgnsY1SOzCXH9m3NCZqrnka8-7w8ldx-R_6poAFFCoSfyESD6qxlcsmYAdPX7jp0fQ/exec";
       const finalURL = `${scriptURL}?receiver=${encodeURIComponent(name)}`;
       document.getElementById("messagesFrame").src = finalURL;
+    }
+
+    function goHome() {
+      window.location.href = "index.html";
     }
   </script>
 </body>
