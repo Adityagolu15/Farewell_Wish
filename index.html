@@ -106,7 +106,8 @@
         alert("Please enter your name");
         return;
       }
-      const link = `message.html?to=${encodeURIComponent(name)}`;
+      const baseURL = window.location.origin + window.location.pathname.replace("index.html", "");
+      const link = `${baseURL}message.html?to=${encodeURIComponent(name)}`;
       document.getElementById("linkOutput").innerHTML = `
         <strong>🎉 Share this link with your friends:</strong><br>
         <a href="${link}" target="_blank">${window.location.origin}/${link}</a>`;
