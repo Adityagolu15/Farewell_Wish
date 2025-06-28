@@ -85,6 +85,20 @@
     .nav-link a:hover {
       text-decoration: underline;
     }
+    #whatsappShareBtn {
+      display: none;
+      text-align: center;
+      margin-top: 15px;
+    }
+    #whatsappShareBtn a {
+      background-color: #25D366;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+    }
   </style>
 </head>
 <body>
@@ -94,6 +108,7 @@
     <input type="text" id="yourName" placeholder="Enter Your Name (e.g., Aditya)"/>
     <button onclick="generateLink()">🔗 Create My Link</button>
     <div id="linkOutput"></div>
+    <div id="whatsappShareBtn"></div>
     <div class="nav-link">
       📬 Want to read your received messages? <a href="view.html">Click here</a>
     </div>
@@ -106,12 +121,23 @@
         alert("Please enter your name");
         return;
       }
-      const baseURL = window.location.pathname.replace(/\/?index\.html?$/, "/");
-      const link = `${baseURL}message.html?to=${encodeURIComponent(name)}`;
+
+      // Auto-detect GitHub folder if any (e.g., /Farewell_Wish/)
+      const folder = window.location.pathname.split("/")[1];
+      const basePath = folder ? `/${folder}/` : "/";
+      const finalLink = `${window.location.origin}${basePath}message.html?to=${encodeURIComponent(name)}`;
 
       document.getElementById("linkOutput").innerHTML = `
         <strong>🎉 Share this link with your friends:</strong><br>
-        <a href="${link}" target="_blank">${window.location.origin}/${link}</a>`;
+        <a href="${finalLink}" target="_blank">${finalLink}</a>`;
+
+      // WhatsApp Share Link
+      const whatsappMessage = `Hey! Send your farewell message to me here 👉 ${finalLink}`;
+      const whatsappLink = `https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`;
+      document.getElementById("whatsappShareBtn").innerHTML = `
+        <a href="${whatsappLink}" target="_blank">📱 Share on WhatsApp</a>
+      `;
+      document.getElementById("whatsappShareBtn").style.display = "block";
     }
   </script>
 </body>
