@@ -3,117 +3,105 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>💌 Farewell Messages</title>
+  <title>View Farewell Messages</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
       margin: 0;
-      padding: 30px;
-      text-align: center;
-      animation: fadeIn 1s ease-in-out;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+      animation: fadeIn 1.2s ease-in-out;
     }
-
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
-    h1 {
-      color: #6a1b9a;
-      font-size: 2.3rem;
-      margin-bottom: 15px;
+    .container {
+      background: #fff8e1;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+      animation: slideUp 1s ease;
     }
-
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    h1 {
+      text-align: center;
+      color: #4e342e;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
     .subtext {
-      color: #555;
+      text-align: center;
       font-size: 1rem;
+      color: #5e5e5e;
       margin-bottom: 25px;
     }
-
     input {
-      padding: 12px;
-      font-size: 16px;
-      width: 280px;
-      border: 2px solid #ccc;
-      border-radius: 8px;
-      outline: none;
-      transition: border-color 0.3s ease;
-    }
-
-    input:focus {
-      border-color: #8e24aa;
-    }
-
-    .view-btn {
-      margin-left: 10px;
-      padding: 12px 20px;
-      background: linear-gradient(to right, #6a1b9a, #d81b60);
-      color: white;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s;
-    }
-
-    .view-btn:hover {
-      background: linear-gradient(to right, #8e24aa, #c2185b);
-      transform: scale(1.03);
-    }
-
-    iframe {
       width: 100%;
-      height: 600px;
-      margin-top: 30px;
+      padding: 14px;
+      font-size: 16px;
+      border-radius: 12px;
+      border: 2px solid #ccc;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    input:focus {
+      border-color: #f57c00;
+      box-shadow: 0 0 5px rgba(245, 124, 0, 0.4);
+      outline: none;
+    }
+    button {
+      background: linear-gradient(to right, #ff6f00, #ffa726);
+      color: white;
+      padding: 14px;
+      font-size: 16px;
+      width: 100%;
       border: none;
       border-radius: 12px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-      display: none;
-    }
-
-    .back-btn {
-      margin-top: 30px;
-      padding: 12px 24px;
-      background: linear-gradient(to right, #6a1b9a, #d81b60);
-      color: white;
-      font-size: 16px;
-      border: none;
-      border-radius: 10px;
       cursor: pointer;
       transition: background 0.3s ease, transform 0.2s;
     }
-
-    .back-btn:hover {
-      background: linear-gradient(to right, #8e24aa, #c2185b);
-      transform: scale(1.03);
+    button:hover {
+      background: linear-gradient(to right, #e65100, #ff8f00);
+      transform: scale(1.02);
+    }
+    iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+      margin-top: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 <body>
-
-  <h1>📬 View Your Farewell Messages</h1>
-  <div class="subtext">Enter your name below to see what your friends shared 💬</div>
-
-  <input type="text" id="receiverInput" placeholder="Enter your name (e.g., Aditya)" />
-  <button class="view-btn" onclick="loadMessages()">View Messages</button>
-
-  <iframe id="messageFrame"></iframe>
-
-  <br>
-  <button class="back-btn" onclick="window.location.href='index.html'">🏠 Back to Home</button>
+  <div class="container">
+    <h1>💌 View Your Messages</h1>
+    <div class="subtext">Enter your name to see what your friends wrote for you ✨</div>
+    <input type="text" id="receiverInput" placeholder="Enter your name (e.g., Sakshi)">
+    <button onclick="loadMessages()">🔍 Show Messages</button>
+    <iframe id="messagesFrame"></iframe>
+  </div>
 
   <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxTcm-oOrdaOHGzcXThHHadluw-8G7bKK7Cg-Xiyudw4ox2RJZ7XK-Uo-g2kVYWw_qRCQ/exec"; // 🔁 Replace this
-
     function loadMessages() {
       const name = document.getElementById("receiverInput").value.trim();
-      if (!name) return alert("Please enter your name");
+      if (!name) {
+        alert("Please enter your name.");
+        return;
+      }
 
-      const frame = document.getElementById("messageFrame");
-      frame.src = `${scriptURL}?receiver=${encodeURIComponent(name)}`;
-      frame.style.display = "block";
+      const scriptURL = "https://script.google.com/macros/s/AKfycbwgOgnsY1SOzCXH9m3NCZqrnka8-7w8ldx-R_6poAFFCoSfyESD6qxlcsmYAdPX7jp0fQ/exec";
+      const finalURL = `${scriptURL}?receiver=${encodeURIComponent(name)}`;
+      document.getElementById("messagesFrame").src = finalURL;
     }
   </script>
 </body>
